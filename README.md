@@ -4,7 +4,7 @@
 
 Submitted by: **Tianhe Wang**
 
-Time spent: **4** hours spent in total
+Time spent: **8** hours spent in total
 
 ## User Stories
 
@@ -21,19 +21,25 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] Customized app icon
+- [x] Customized background image
+- [x] Bill split with a stepper input
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/uPFXhua.gif?1' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/RNCL2Ef.gif?1' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Challenges:
+1. Getting the background image in place
+2. Making the number format right, with currency thousands separators
+3. App icon: attempting a few times until I noticed that a 80x80 size is required, instead recommended
+4. Remembering bill amount: it took me a few attempts to get both timestamp and bill amount value stored
 
 ## License
 
