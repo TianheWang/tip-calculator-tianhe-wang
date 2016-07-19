@@ -14,9 +14,15 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var totalLabel: UILabel!
 
+    @IBOutlet weak var eachBillLabel: UILabel!
+
+    @IBOutlet weak var partySizeLabel: UILabel!
+
     @IBOutlet weak var billField: UITextField!
 
     @IBOutlet weak var tipControl: UISegmentedControl!
+
+    @IBOutlet weak var partySizeControl: UIStepper!
 
     let currencyFormatter = NSNumberFormatter()
 
@@ -36,6 +42,9 @@ class ViewController: UIViewController {
         currencyFormatter.numberStyle = .CurrencyStyle
         tipLabel.text = currencyFormatter.stringFromNumber(0)
         totalLabel.text = currencyFormatter.stringFromNumber(0)
+
+        // initialize party size
+        partySizeControl.value = 1
 
         if let lastBillAmount = getLastBillAmount() {
             billField.text = lastBillAmount
@@ -61,12 +70,25 @@ class ViewController: UIViewController {
 
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
+        let each = total / partySizeControl.value
 
         tipLabel.text = currencyFormatter.stringFromNumber(tip)
         totalLabel.text = currencyFormatter.stringFromNumber(total)
+        eachBillLabel.text = currencyFormatter.stringFromNumber(each)
 
         animateTotal()
         animateTip()
+        animateEach()
+    }
+
+    @IBAction func partySizeChanged(sender: AnyObject) {
+        var partySize = Int(partySizeControl.value) ?? 1
+        if (partySize < 1) {
+            partySizeControl.value = 1
+            partySize = 1
+        }
+        partySizeLabel.text = String(partySize)
+        calculateTip(tipControl)
     }
 
     func getLastBillAmount() -> String? {
@@ -94,8 +116,16 @@ class ViewController: UIViewController {
     func animateTip() {
         self.tipLabel.alpha = 0
         UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn,
-                                   animations: {
-                                    self.tipLabel.alpha = 1
+                animations: {
+                    self.tipLabel.alpha = 1
+            }, completion: nil)
+    }
+
+    func animateEach() {
+        self.eachBillLabel.alpha = 0
+        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn,
+                animations: {
+                     self.eachBillLabel.alpha = 1
             }, completion: nil)
     }
 }
