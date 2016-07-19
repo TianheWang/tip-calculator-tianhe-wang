@@ -28,10 +28,9 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
         let defaults = NSUserDefaults.standardUserDefaults()
         tipControl.selectedSegmentIndex = defaults.integerForKey("defaultTipPercentage")
-
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fine-dining")!)
         calculateTip(tipControl)
     }
 
