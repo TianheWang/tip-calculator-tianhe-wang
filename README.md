@@ -24,12 +24,17 @@ The following **additional** features are implemented:
 - [x] Customized app icon
 - [x] Customized background image
 - [x] Bill split with a stepper input
+- [x] Add preference on pre-tax tipping or after-tax tipping
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
 <img src='http://i.imgur.com/RNCL2Ef.gif?1' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+With Tax Preference:
+
+<img src='http://i.imgur.com/EddFlvr.gif?1' title='With Tax Preference' width='' alt='With Tax Preference' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

@@ -59,16 +59,19 @@ class ViewController: UIViewController {
 
     @IBAction func calculateTip(sender: AnyObject) {
         let tipPercentages = [0.15, 0.18, 0.2]
-        let bill = Double(billField.text!) ?? 0
+        var bill = Double(billField.text!) ?? 0
         // save bill amount
         let defaults = NSUserDefaults.standardUserDefaults()
         let billAmountString = billField.text! as String
-        defaults.setObject(billAmountString, forKey: "last_bill_amount")
-        defaults.setObject(NSDate(), forKey: "last_bill_timestamp")
+        defaults.setObject(billAmountString, forKey: "lastBillAmount")
+        defaults.setObject(NSDate(), forKey: "lastBillTimestamp")
         defaults.synchronize()
 
+        let taxRate = defaults.doubleForKey("taxRate") / 100.0
+        bill = bill / (1 + taxRate)
+        let tax = bill * taxRate
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
-        let total = bill + tip
+        let total = bill + tip + tax
         let each = total / partySizeControl.value
 
         tipLabel.text = currencyFormatter.stringFromNumber(tip)
@@ -93,14 +96,14 @@ class ViewController: UIViewController {
     func getLastBillAmount() -> String? {
         let now = NSDate()
         let defaults = NSUserDefaults.standardUserDefaults()
-        let lastBillTimestamp = defaults.objectForKey("last_bill_timestamp") as! NSDate?
+        let lastBillTimestamp = defaults.objectForKey("lastBillTimestamp") as! NSDate?
         // last bill amount persist for 10 minutes
         let isBillAmountExpired = lastBillTimestamp == nil || now.timeIntervalSinceDate(lastBillTimestamp!) > NSTimeInterval(10 * 60)
 
         if isBillAmountExpired {
             return nil
         } else {
-            return defaults.stringForKey("last_bill_amount") as String?
+            return defaults.stringForKey("lastBill_amount") as String?
         }
     }
 
